@@ -1,4 +1,4 @@
-    #!/usr/bin/env python3
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Created on Sat Jul 15 18:50:38 2017
@@ -8,21 +8,23 @@ Created on Sat Jul 15 18:50:38 2017
 
 import math
 
+
 def Largest_prime_factor1(n):
-    while(n % 2 == 0):
+    while (n % 2 == 0):
         n = n // 2
     if n == 1:
         return 2
     p = 3
-    while(n > 1):
-        while(1):
+    while (n > 1):
+        while (1):
             if n % p != 0:
                 break
             n = n // p
         p += 2
     return p - 2
 
-#print(Largest_prime_factor1(64 * 9))
+
+# print(Largest_prime_factor1(64 * 9))
 
 
 def Largest_prime_factor(n):
@@ -47,5 +49,6 @@ def Largest_prime_factor(n):
         return lastFactor
     else:
         return n
+
 
 print(Largest_prime_factor(18))
