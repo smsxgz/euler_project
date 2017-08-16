@@ -8,6 +8,7 @@ Created on Thu Aug  3 13:44:36 2017
 
 from functools import reduce
 
+
 def mul(x, y):
     return x * y
 
@@ -49,6 +50,7 @@ def Largest_product(s, k):
         if a > b:
             largest_product = product
     return largest_product
+
 
 s_list = a.split('0')
 # max([Largest_product(s, 4) for s in s_list])
