@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from numpy import sqrt
+import time
 
 
 def sum_divisor(n):
@@ -37,6 +38,8 @@ for i in range(1, 10000):
 s = []
 for i in range(2, 10000):
     j = d[i]
+    if j == i:
+        continue
     try:
         k = d[j]
     except KeyError:
@@ -44,3 +47,54 @@ for i in range(2, 10000):
     if k == i:
         s.append(i)
 s
+sum(s)
+
+
+def SumOfDivisors(n):
+    s = 1
+    p = 2
+    while p * p <= n and n > 1:
+        if n % p == 0:
+            j = p * p
+            n = n // p
+            while n % p == 0:
+                j = j * p
+                n = n // p
+            s = s * (j - 1)
+            s = s // (p - 1)
+        if p == 2:
+            p = 3
+        else:
+            p = p + 2
+    if n > 1:
+        s = s * (n + 1)
+    return s
+
+
+start = time.time()
+s = 0
+for i in range(2, 10000):
+    j = SumOfDivisors(i) - i
+    if j > i and SumOfDivisors(j) - j == i:
+        s += i + j
+s
+print(time.time() - start)
+
+n = 10000
+start = time.time()
+divisorsum = [0] * n
+for i in range(1, n // 2):
+    for j in range(i * 2, n, i):
+        divisorsum[j] += i
+
+for i in range(2, 10000):
+    j = divisorsum[i]
+    if j > i:
+        if j >= n:
+            k = SumOfDivisors(j)
+        else:
+            k = divisorsum[j]
+        if k == i:
+            s += i + j
+s
+print(time.time() - start)
