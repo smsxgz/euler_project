@@ -6,22 +6,22 @@ Created on Sat Jul 15 22:40:24 2017
 @author: smsxgz
 """
 
+
 def euler_prime(n):
     prime = []
     vis = [0] * (n + 1)
-    #psum = 0
+    # psum = 0
     for i in range(2, n + 1):
         if not vis[i]:
             prime.append(i)
-            #psum += i
+            # psum += i
         for p in prime:
             if i * p > n:
                 break
             vis[i * p] = 1
-            if(i % p == 0):
+            if (i % p == 0):
                 break
     return prime
-
 
 
 len(euler_prime(1300000))
