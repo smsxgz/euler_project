@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+import time
+
+
 def is_prime(p):
     if p == 1:
         return False
@@ -19,6 +22,7 @@ def is_prime(p):
     return True
 
 
+start = time.time()
 l = [1, 3, 7, 9]
 for k in range(2, 7):
     r = []
@@ -50,3 +54,45 @@ for i, p in enumerate(r):
 ans
 
 4 + sum(ans)
+print(time.time() - start)
+
+
+# From Nayuki
+def sqrt(x):
+    assert x >= 0
+    i = 1
+    while i * i <= x:
+        i *= 2
+    y = 0
+    while i > 0:
+        if (y + i)**2 <= x:
+            y += i
+        i //= 2
+    return y
+
+
+def list_primality(n):
+    # Sieve of Eratosthenes
+    result = [True] * (n + 1)
+    result[0] = result[1] = False
+    for i in range(sqrt(n) + 1):
+        if result[i]:
+            for j in range(i * i, len(result), i):
+                result[j] = False
+    return result
+
+
+def compute():
+    isprime = list_primality(999999)
+
+    def is_circular_prime(n):
+        s = str(n)
+        return all(isprime[int(s[i:] + s[:i])] for i in range(len(s)))
+
+    ans = sum(1 for i in range(len(isprime)) if is_circular_prime(i))
+    return str(ans)
+
+
+start = time.time()
+compute()
+print(time.time() - start)
