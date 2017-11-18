@@ -47,13 +47,46 @@ def sqrt(n):
     return left
 
 
-if __name__ == '__main__':
-    import random
-    with StopWatch():
-        for _ in range(1000):
-            sqrt(1234567890)
-    with StopWatch():
-        for _ in range(1000):
-            sqrt1(1234567890)
+def power(n, k):
+    assert n > 0
+    m = power(n, k // 2)
+    if k % 2 == 1:
+        return m * m * n
+    else:
+        return m * m
 
-    print(sqrt(1234567890), sqrt1(1234567890))
+
+def Eulid(n, m):
+    while n > 0:
+        n, m = m % n, n
+    return m
+
+
+gcd = Eulid
+
+
+def extend_Eulid(n, m):
+    """
+        find k, l,
+        s.t. k * n + l * m == gcd(n, m)
+    """
+    if not m:
+        return 1, 0, n
+    else:
+        x, y, d = extend_Eulid(m, n % m)
+        return y, x - y * (n // m), d
+
+
+def inverse_mod(n, m):
+    x, y, d = extend_Eulid(n, m)
+    assert d == 1
+    return x
+
+
+if __name__ == '__main__':
+    pass
+    import numpy as np
+    m, n = np.random.randint(5, 100, 2)
+    print(m, n)
+    x, y, d = extend_Eulid(m, n)
+    print(x * m + y * n == d)
