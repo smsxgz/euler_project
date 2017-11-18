@@ -15,10 +15,9 @@ class Triangle(object):
 
 tot = 0
 f = open('p102_triangles.txt', 'r')
-l = f.readline()
 for line in f.readlines():
     l = [int(s) for s in line.strip().split(',')]
     t = Triangle(l)
     if t.origin_contain:
         tot += 1
-    t.origin_contain
+print(tot)
