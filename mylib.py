@@ -83,6 +83,19 @@ def inverse_mod(n, m):
     return x
 
 
+def euler_func(n):
+    phi = [0] * (n + 1)
+    phi[1] = 1
+    for i in range(2, n + 1):
+        if not phi[i]:
+            phi[i] = i - 1
+            for j in range(i << 1, n + 1, i):
+                if not phi[j]:
+                    phi[j] = j
+                phi[j] = phi[j] // i * (i - 1)
+    return phi[1:]
+
+
 if __name__ == '__main__':
     pass
     import numpy as np
@@ -90,3 +103,4 @@ if __name__ == '__main__':
     print(m, n)
     x, y, d = extend_Eulid(m, n)
     print(x * m + y * n == d)
+    euler_func(5)
