@@ -1,0 +1,4 @@
+board = {}
+
+# Community Chest
+board[]
