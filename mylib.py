@@ -1,7 +1,8 @@
 import time
+import math
 
 
-class StopWatch(object):
+class StopWatch:
     def __enter__(self, *args):
         self.start = time.time()
 
@@ -25,26 +26,33 @@ def euler_prime(n):
 
 
 def sqrt1(n):
-    k = 1
-    while k * k <= n:
-        k += 1
-    return k - 1
+    left = 0
+    right = n
+    while left <= right:
+        mid = (left + right) // 2
+        if mid * mid > n:
+            right = mid - 1
+        elif (mid + 1) * (mid + 1) <= n:
+            left = mid + 1
+        else:
+            return mid
 
 
 def sqrt(n):
-    k = 1
-    while k * k <= n:
-        k *= 2
+    return int(math.sqrt(n + 0.5))
 
-    left = k // 2
-    right = k
-    while left + 1 < right:
-        mid = (left + right) // 2
-        if mid * mid <= n:
-            left = mid
-        else:
-            right = mid
-    return left
+
+def sqrt2(n):
+    return int((n + 0.5)**(1 / 2))
+
+
+def sqrt3(n):
+    sq = n // 2
+    while True:
+        if sq * sq <= n and (sq + 1) * (sq + 1) > n:
+            break
+        sq = (sq + n // sq) // 2
+    return sq
 
 
 def power(n, k):
@@ -97,10 +105,14 @@ def euler_func(n):
 
 
 if __name__ == '__main__':
-    pass
     import numpy as np
     m, n = np.random.randint(5, 100, 2)
     print(m, n)
     x, y, d = extend_Eulid(m, n)
     print(x * m + y * n == d)
     euler_func(5)
+
+    # %timeit sqrt(int(9e18))
+    # %timeit sqrt1(int(9e18))
+    # %timeit sqrt2(int(9e18))
+    # %timeit sqrt3(int(9e18))
