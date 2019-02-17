@@ -157,13 +157,13 @@ def efficient_square_free(N):
 
 
 if __name__ == '__main__':
-    N = 2**50
+    N = 2**52
     # N = 1000
-    with StopWatch():
-        print(square_free(N))
+    # with StopWatch():
+    #     square_free(N)
 
     with StopWatch():
-        print(efficient_square_free(N))
+        efficient_square_free(N)
 
-    with StopWatch():
-        print(euler193(N))
+    # with StopWatch():
+    #     print(euler193(N))
