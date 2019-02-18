@@ -1,19 +1,5 @@
 import itertools
-
-
-def euler_prime(n):
-    prime = []
-    vis = [0] * (n + 1)
-    for i in range(2, n + 1):
-        if not vis[i]:
-            prime.append(i)
-        for p in prime:
-            if i * p > n:
-                break
-            vis[i * p] = 1
-            if (i % p == 0):
-                break
-    return prime
+from mylib import euler_prime
 
 
 def all_not_empty_subset(lst):
