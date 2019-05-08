@@ -92,16 +92,40 @@ def inverse_mod(n, m):
 
 
 def euler_func(n):
-    phi = [0] * (n + 1)
-    phi[1] = 1
+    sieveLimit = sqrt(n)
+    spf = [2 if i % 2 == 0 else i for i in range(n + 1)]
+    for i in range(3, sieveLimit + 1, 2):
+        if spf[i] == i:
+            for m in range(i * i, n + 1, 2 * i):
+                if spf[m] == m:
+                    spf[m] = i
+
+    phis = [0] * (n + 1)
+    phis[1] = 1
     for i in range(2, n + 1):
-        if not phi[i]:
-            phi[i] = i - 1
-            for j in range(i << 1, n + 1, i):
-                if not phi[j]:
-                    phi[j] = j
-                phi[j] = phi[j] // i * (i - 1)
-    return phi[1:]
+        if spf[i] == i:
+            phis[i] = i - 1
+        else:
+            p = spf[i]
+            m = i // p
+            factor = p if spf[m] == p else p - 1
+            phis[i] = factor * phis[m]
+
+
+def Mobius(n):
+    prime = [1] * (n + 1)
+    mobius = [1] * (n + 1)
+
+    for i in range(2, n + 1):
+        if not prime[i]:
+            continue
+        mobius[i] = -1
+        for j in range(2, n // i + 1):
+            prime[i * j] = 0
+            mobius[i * j] *= -1
+        for j in range(1, n // (i * i) + 1):
+            mobius[j * i * i] = 0
+    return mobius
 
 
 if __name__ == '__main__':
