@@ -1,6 +1,5 @@
 from mylib import StopWatch
 from math import sqrt
-import numba as nb
 
 
 def Mertens(D):
