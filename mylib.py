@@ -111,6 +111,8 @@ def euler_func(n):
             factor = p if spf[m] == p else p - 1
             phis[i] = factor * phis[m]
 
+    return phis
+
 
 def Mobius(n):
     prime = [1] * (n + 1)
