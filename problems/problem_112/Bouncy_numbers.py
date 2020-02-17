@@ -46,4 +46,6 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    from mylib import StopWatch
+    with StopWatch():
+        main()

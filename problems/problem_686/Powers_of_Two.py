@@ -1,5 +1,5 @@
 import gmpy2 as math
-math.get_context().precision = 200
+math.get_context().precision = 50
 
 
 def solve(n):
