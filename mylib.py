@@ -56,12 +56,31 @@ def sqrt3(n):
 
 
 def power(n, k):
-    assert n > 0
+    if k == 0:
+        return 1
+
+    if k == 1:
+        return n
+
     m = power(n, k // 2)
     if k % 2 == 1:
         return m * m * n
     else:
         return m * m
+
+
+def power_mod(n, k, M):
+    if k == 0:
+        return 1
+
+    if k == 1:
+        return n
+
+    m = power_mod(n, k // 2, M)
+    if k % 2 == 1:
+        return (m * m * n) % M
+    else:
+        return (m * m) % M
 
 
 def Eulid(n, m):
@@ -130,15 +149,29 @@ def Mobius(n):
     return mobius
 
 
-if __name__ == '__main__':
-    import numpy as np
-    m, n = np.random.randint(5, 100, 2)
-    print(m, n)
-    x, y, d = extend_Eulid(m, n)
-    print(x * m + y * n == d)
-    euler_func(5)
+def Miller_Rabin(n):
+    test = [2, 3, 5, 7, 11, 13, 17]
+    if n in test:
+        return True
 
-    # %timeit sqrt(int(9e18))
-    # %timeit sqrt1(int(9e18))
-    # %timeit sqrt2(int(9e18))
-    # %timeit sqrt3(int(9e18))
+    d = n - 1
+    r = 0
+    while d % 2 == 0:
+        d //= 2
+        r += 1
+
+    for a in test:
+        x = power_mod(a, d, n)
+        if x == 1 or x == n - 1:
+            continue
+        for _ in range(r - 1):
+            x = (x * x) % n
+            if x == n - 1:
+                break
+        else:
+            return False
+    return True
+
+
+if __name__ == '__main__':
+    print(Miller_Rabin(211))
