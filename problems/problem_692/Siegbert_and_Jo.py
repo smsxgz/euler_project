@@ -1,4 +1,18 @@
 def main(N):
+    fibo1, fibo2 = 1, 1
+    g1, g2 = 1, 1
+    # ssum = 1
+
+    while True:
+        fibo1, fibo2 = fibo2, fibo1 + fibo2
+        if fibo2 > N:
+            break
+        g1, g2 = g2, g1 + g2 + fibo1
+
+    return g2
+
+
+def main2(N):
     ssum = 1
     fibo1 = 1
     fibo2 = 1
