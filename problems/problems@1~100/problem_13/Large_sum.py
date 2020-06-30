@@ -12,11 +12,16 @@ with open('data.txt', 'r') as f:
 result = []
 k = 0
 for i in range(m):
-    s = k
     for q in data:
-        s += int(q.pop())
-    k = s // 10
-    result.append(str(s % 10))
+        k += int(q.pop())
+    result.append(str(k % 10))
+    k //= 10
 
-k
-str(k) + ''.join(result[-1:-9:-1])
+while k > 0:
+    result.append(k % 10)
+    k //= 10
+
+res = ''
+for i in range(10):
+    res += str(result[-i - 1])
+print(res)

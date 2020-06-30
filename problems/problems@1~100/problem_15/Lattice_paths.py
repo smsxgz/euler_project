@@ -6,4 +6,4 @@ def mul(x, y):
     return x * y
 
 
-2 * reduce(mul, range(21, 40)) // reduce(mul, range(2, 20))
+print(2 * reduce(mul, range(21, 40)) // reduce(mul, range(2, 20)))
