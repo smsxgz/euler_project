@@ -47,7 +47,7 @@ def Largest_product(s, k):
         a = num_list[k + i]
         b = num_list[i]
         product = product // b * a
-        if a > b:
+        if product > largest_product:
             largest_product = product
     return largest_product
 
