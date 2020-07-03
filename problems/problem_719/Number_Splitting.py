@@ -1,28 +1,33 @@
-mem = {(0, ''): True}
+def split(goal, digits):
+    if digits < goal:
+        return False
 
+    elif digits == goal:
+        return True
 
-def split(goal, n_str):
-    if (goal, n_str) in mem:
-        return mem[(goal, n_str)]
-
-    for i in range(1, len(n_str) + 1):
-        if int(n_str[:i]) <= goal:
-            if split(goal - int(n_str[:i]), n_str[i:]):
-                mem[(goal, n_str)] = True
+    t = 10
+    while t < digits:
+        cutoff = digits // t
+        rest = digits % t
+        if rest < goal:
+            if split(goal - rest, cutoff):
                 return True
         else:
             break
-    mem[(goal, n_str)] = False
+
+        t *= 10
+
     return False
 
 
 def main(N):
     res = 0
     for i in range(1, N + 1):
-        if i % 10000 == 0:
-            print(i)
+        if i % 9 != 0 and i % 9 != 1:
+            continue
+
         sq = i * i
-        if split(i, str(sq)):
+        if split(i, sq):
             res += sq
     print(res)
 
