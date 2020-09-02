@@ -173,5 +173,18 @@ def Miller_Rabin(n):
     return True
 
 
+def combinations(lst, k, prefix=[]):
+    if len(lst) == k:
+        yield prefix + lst
+        return
+
+    if k == 0:
+        yield prefix
+        return
+
+    yield from combinations(lst[1:], k - 1, prefix + [lst[0]])
+    yield from combinations(lst[1:], k, prefix)
+
+
 if __name__ == '__main__':
     print(Miller_Rabin(211))
