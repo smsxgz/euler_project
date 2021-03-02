@@ -20,7 +20,8 @@ def Smallest_multiple(n, p_list):
             break
         if p <= limit:
             a[i] = math.floor(ln / math.log(p))
-        N = N * p ** a[i]
+        N = N * p**a[i]
     return N
+
 
 print(Smallest_multiple(20, p_list))
